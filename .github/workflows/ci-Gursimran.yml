@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # You can specify the version you want
+
+      - name: Install dependencies
+        run: |
+          cd my-app
+          npm install
+
+      - name: Run tests
+        run: |
+          cd my-app
+          npm test -- --watchAll=false
+
+      - name: Build the project
+        run: |
+          cd my-app
+          npm run build
+ 
